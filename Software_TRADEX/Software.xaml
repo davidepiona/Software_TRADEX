@@ -1,0 +1,123 @@
+﻿<Page x:Class="Software_TRADEX.Software"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Software_TRADEX"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="800"
+      
+      Title="Software">
+
+    <Grid x:Name="grid" Margin="10" Grid.Column="1" Grid.Row="1">
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\attil\source\repos\Software_TRADEX\Software_TRADEX\background.jpg" />
+        </Grid.Background>
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+
+        <!--<Canvas  Grid.Column="1" Grid.ColumnSpan="3"  Grid.Row="1" HorizontalAlignment="Left"  Grid.RowSpan="9" VerticalAlignment="Top" Height="750" Width="900" Background="#FFE0E0E0" ClipToBounds="True" UseLayoutRounding="True"/>-->
+        <!--<Canvas  Grid.Column="1" Grid.ColumnSpan="3"  Grid.Row="1" HorizontalAlignment="Left"  Grid.RowSpan="9" VerticalAlignment="Top" Height="750" Width="900" Background="#FFE0E0E0" ClipToBounds="True" UseLayoutRounding="True"/>-->
+        <Border Grid.Column="1" Grid.ColumnSpan="4"  Grid.Row="1" HorizontalAlignment="Left"  Grid.RowSpan="9" VerticalAlignment="Top" Height="650" Width="900" Background="#FFE8E9EB" CornerRadius="8" OpacityMask="#FF4F1A1A" />
+
+
+
+        <Label x:Name="titolo" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Dubai Medium" 
+ FontWeight="Bold" FontSize="50" Foreground="Ivory" Content="SOFTWARE" />
+
+        <Button Grid.Column="5" Grid.Row="2"  Width="150" HorizontalAlignment="Center"
+Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri" 
+                ToolTip="Apre nel filesystem la cartella del progetto selezionato" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}">
+            <Image Source="C:\Users\attil\source\repos\ExpenseIt\ExpenseIt\foldericon.png"/>
+        </Button>
+        <Button Grid.Column="5" Grid.Row="3"  Width="150" HorizontalAlignment="Center"
+            Height="40" Click="Button_New_Project" Background="Ivory" Content="Nuovo Progetto" x:Name="BottNuovo" 
+                ToolTip="Apre il form che permette di creare un nuovo progetto" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121"/>
+        <Button Grid.Column="5" Grid.Row="4"  Width="150" HorizontalAlignment="Center"
+            Height="40" Click="Button_Convert" Background="Ivory" Content="Conversione" x:Name="BottConv"
+                ToolTip="Converte dal vecchio formato di TRADEX" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121"/>
+        <Button Grid.Column="5" Grid.Row="5"  Width="150" HorizontalAlignment="Center"
+            Height="40" Click="Button_Ultime_Modifiche" Background="Ivory" Content="Modifiche" x:Name="BottModifiche" 
+                ToolTip="Aggiorna le ultime modifiche di ogni progetto: &#xA; - cerca l'ultima modifica di ogni cartella &#xA; - le scrive nel csv apposito &#xA; - aggiorna i valori dei progetti &#xA; - aggiorna la tabella" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121"/>
+        <!--<Button Grid.Column="5" Grid.Row="6"  Width="150" HorizontalAlignment="Center"
+            Height="40" Click="Sync" Background="Green" Content="Sync" x:Name="BottSync"/>-->
+
+
+
+        <TextBox x:Name="TextBox" Grid.Row="1" Grid.ColumnSpan="6"  Padding="17,0,0,1" Background="White" 
+                 HorizontalAlignment="Center" FontSize="13" Margin="10,15,22,17" VerticalAlignment="Top" 
+                 Width="230" Height="30" TextChanged="TextBox_TextChanged" IsHitTestVisible="True" Foreground="#FF212121" />
+        <Image Grid.ColumnSpan="6" Grid.Row="1" Height='20' Width='20' HorizontalAlignment="Center" 
+               Margin="0,20,210,17" VerticalAlignment="Top" 
+               Source="C:\Users\attil\source\repos\ExpenseIt\ExpenseIt\magnifier.png" />
+
+        <RichTextBox x:Name="richTextBox" Grid.Column="0" Grid.Row="4" Grid.RowSpan="3" Margin="5,5,5,5" IsReadOnly="True" Visibility="Hidden" />
+        <Button x:Name="buttonOpenDocx" Grid.Column="0" Grid.Row="7"  Width="150" HorizontalAlignment="Center" Foreground="#FF212121"
+            Height="40" Click="Button_Apri_Docx" Background="Ivory" Content="Apri Docx" Visibility="Hidden"
+                ToolTip="Apre in Word il file docx visualizzato in anteprima" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}"/>
+
+        <Menu DockPanel.Dock="Left" Grid.Column="5"  Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center"
+              Margin="0,0,40,0">
+            <MenuItem Width="50" Height="50" FlowDirection="RightToLeft">
+                <MenuItem.Background>
+                    <ImageBrush ImageSource="C:\Users\attil\source\repos\Software_TRADEX\Software_TRADEX\lines.png"/>
+                </MenuItem.Background>
+                <MenuItem Header="Imposta percorsi file" Click="Menu_percorsi" Background="Ivory">
+                    <MenuItem.Icon>
+                        <Image Source="C:\Users\attil\source\repos\ExpenseIt\ExpenseIt\foldericon.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Importa CSV da MATRIX" Click="Menu_importa_CSV" Background="Ivory">
+                    <MenuItem.Icon>
+                        <Image Source="C:\Users\attil\source\repos\ExpenseIt\ExpenseIt\IconCsv.ico" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Impostazioni GitHub" Click="Menu_github" Background="Ivory">
+                    <MenuItem.Icon>
+                        <Image Source="C:\Users\attil\source\repos\ExpenseIt\ExpenseIt\github.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Mostra azioni sincronizzazione" Click="Menu_sync" IsCheckable="True" x:Name="Menu_sync_check" Background="Ivory"/>
+            </MenuItem>
+        </Menu>
+        <DataGrid AutoGenerateColumns="False" x:Name="dataGrid" Grid.Column="1" Grid.ColumnSpan="5" HorizontalAlignment="Left" Width="880" Height="566" Margin="10,50,-239.715,0" 
+            Grid.Row="1" Grid.RowSpan="8"  VerticalAlignment="Top" IsSynchronizedWithCurrentItem="True" Foreground="#FF212121" IsReadOnly="True" Background="White" >
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <EventSetter Event="Control.MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="White" />
+                    </Style>
+                </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding numero}" Width="105" FontSize="13" />
+                <DataGridTextColumn Header="Nome" IsReadOnly="True"  Binding="{Binding nome}" Width="489" FontSize="13" />
+                <DataGridTextColumn Header="Ultima Modifica" IsReadOnly="True"  Binding="{Binding dataModifica}" Width="180" FontSize="10" />
+                <DataGridCheckBoxColumn Header="Obsoleto" Binding="{Binding obsoleto}" IsReadOnly="False" CanUserResize="False" Width="80" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
+

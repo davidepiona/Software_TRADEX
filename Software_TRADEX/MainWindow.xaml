@@ -1,12 +1,20 @@
-﻿<Window x:Class="Software_TRADEX.MainWindow"
+﻿<NavigationWindow x:Class="Software_TRADEX.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Software_TRADEX"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
-</Window>
+        Title="MainWindow" Height="900" Width="1400" Source="Software.xaml" WindowStartupLocation="CenterScreen" Icon="C:\Users\attil\source\repos\ExpenseIt\ExpenseIt\IconApp.ico">
+    <NavigationWindow.TaskbarItemInfo>
+        <TaskbarItemInfo/>
+    </NavigationWindow.TaskbarItemInfo>
+</NavigationWindow>
