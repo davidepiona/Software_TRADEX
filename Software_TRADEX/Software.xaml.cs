@@ -30,6 +30,7 @@ namespace Software_TRADEX
     {
         private int ProgSelezionato;
         private UltimaModifica ultimaModifica;
+        private bool newProgram = false;
 
         /// <summary>
         /// Il costruttore inizializza il componenti. Legge i programmi da file e li scrive nella DataGrid.
@@ -166,8 +167,12 @@ namespace Software_TRADEX
                     dataGrid.Items.Add(p);
                     i++;
                 }
-                dataGrid.SelectedIndex = Globals.PROGRAMMI.Last().numero - 1;
-                dataGrid.ScrollIntoView(Globals.PROGRAMMI.Last());
+                if (newProgram)
+                {
+                    newProgram = false;
+                    dataGrid.SelectedIndex = Globals.PROGRAMMI.Last().numero - 1;
+                    dataGrid.ScrollIntoView(Globals.PROGRAMMI.Last());
+                }
             }
         }
         /// <summary>
@@ -256,6 +261,7 @@ namespace Software_TRADEX
         /// </summary>
         private void Button_New_Program(object sender, RoutedEventArgs e)
         {
+            newProgram = true;
             Form_NuovoProgramma form = new Form_NuovoProgramma(Globals.PROGRAMMI.Last().numero);
             form.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.readAgainListPrograms);
             form.ShowDialog();
@@ -327,8 +333,7 @@ namespace Software_TRADEX
             }).ContinueWith(task =>
             {
                 buttonModifiche.IsEnabled = true;
-                string msg = "Le ultime modifiche di tutti i programmi di Id" + ProgSelezionato +
-                    " sono state aggiornate e caricate nel relativo file csv.";
+                string msg = "Le ultime modifiche di tutti i programmi sono state aggiornate e caricate nel relativo file csv.";
                 MessageBox.Show(msg, "Modifiche aggiornate"
                                      , MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                 Globals.log.Info(msg);
@@ -344,6 +349,28 @@ namespace Software_TRADEX
             scriviCSV();
             Console.WriteLine("Salvato PROGRAMMI.csv");
             Globals.log.Info("Salvato PROGRAMMI.csv");
+        }
+
+
+        /// <summary>
+        /// Bottone che elimina il programma selezionato
+        /// </summary>
+        private void Button_Delete(object sender, RoutedEventArgs e)
+        {
+            Programma itemToRemove = Globals.PROGRAMMI.Single(r => r.numero == ProgSelezionato);
+            MessageBoxResult dialogResult = MessageBox.Show("Sei sicuro di voler ELIMINARE il programma "+
+                itemToRemove.nome+ " con codice Id"+ ProgSelezionato+"?",
+               "Conferma Eliminazione", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                if (ProgSelezionato != 0)
+                {
+                    Console.WriteLine("Rimuovo");
+                    Globals.PROGRAMMI.Remove(itemToRemove);
+                    scriviCSV();
+                    readAgainListPrograms(null, null);
+                }
+            }
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
