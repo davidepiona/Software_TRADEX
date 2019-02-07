@@ -13,7 +13,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1400" Source="Software.xaml" WindowStartupLocation="CenterScreen" Icon="R:\TRADE\TRADE\SRC\IconApp.ico">
+        Title="TRADE" Height="900" Width="1400" Source="Software.xaml" WindowStartupLocation="CenterScreen" Icon="R:\TRADE\TRADE\SRC\IconApp.ico">
     <NavigationWindow.TaskbarItemInfo>
         <TaskbarItemInfo/>
     </NavigationWindow.TaskbarItemInfo>

@@ -13,8 +13,8 @@ using System.Windows.Forms;
 namespace Software_TRADEX
 {
     /// <summary>
-    /// Form per il cambio del percorso delle cartelle PROGETTI, DATI e DATIsync
-    /// - verifica che i percorsi portino a delle caselle esistenti
+    /// Form per il cambio del percorso delle cartelle PROGRAMMIpath e DATI
+    /// - verifica che i percorsi portino a cartelle esistenti
     /// </summary>
     public partial class Form_percorsi : Form
     {
@@ -108,7 +108,7 @@ namespace Software_TRADEX
 
         /// <summary>
         /// Da all'utente la possibilità di scegliere se apportare le modifiche o no.
-        /// In seguito aggiorna Globals.PROGETTI, Globals.DATI e Globals.DATIsync(se modificati) e riscrive il file SETTINGS.csv
+        /// In seguito aggiorna Globals.PROGRAMMIpath e Globals.DATI (se modificati) e riscrive il file SETTINGS.csv
         /// Chiude il form
         /// </summary>
         private void button2_Click(object sender, EventArgs e)

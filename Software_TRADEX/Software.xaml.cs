@@ -38,14 +38,11 @@ namespace Software_TRADEX
         {
             InitializeComponent();
             PreviewKeyDown += new KeyEventHandler(PreviewKeyDown2);
+            Loaded += Software_Loaded;
             readPrograms();
             createList();
             this.ultimaModifica = new UltimaModifica();
-            //SET VISIBILITY
-            //RICHTEXTBOX VISIBILE SOLO SE C'E' QUEL, mia sempar
-            //CARTELLA NON ESISTENTE
-            //ELIMINARE PROGRAMMA
-            //E00
+            SetVisibility();
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,7 +50,7 @@ namespace Software_TRADEX
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>
-        /// Legge i progetti da file .csv e li salva nella lista programmi.
+        /// Legge i programmi da file .csv e li salva nella lista programmi.
         /// </summary>
         private void readPrograms()
         {
@@ -81,16 +78,16 @@ namespace Software_TRADEX
             }
             catch (IOException)
             {
-                string msg = "E00 - Il file " + Globals.DATI + @"PROGRAMMI.csv non esiste o è aperto da un altro programma. \n";
-                MessageBox.Show(msg, "E00"
+                string msg = "E01 - Il file " + Globals.DATI + @"PROGRAMMI.csv non esiste o è aperto da un altro programma. \n";
+                MessageBox.Show(msg, "E01"
                                      , MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                 Globals.log.Fatal(msg);
             }
             catch (FormatException)
             {
-                string msg = "E00 - Il file " + Globals.DATI + @"PROGRAMMI.csv" +
+                string msg = "E02 - Il file " + Globals.DATI + @"PROGRAMMI.csv" +
                     " è in un formato non corretto. \nProblema riscontrato al programma numero: " + j;
-                MessageBox.Show(msg, "E00", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
+                MessageBox.Show(msg, "E02", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                 Globals.log.Error(msg);
             }
         }
@@ -148,7 +145,7 @@ namespace Software_TRADEX
 
         /// <summary>
         /// Aggiorna gli elementi nella DataGrid DOPO AVER CREATO NUOVI PROGRAMMI:
-        /// - LEGGE I PROGETTI DA FILE (unica cosa in più del precedente)
+        /// - LEGGE I PROGRAMMI DA FILE (unica cosa in più del precedente)
         /// - aggiorna le ultime modifiche in programmi
         /// - aggiunge tutti i programmi presenti dopo aver svuotato la DataGrid
         /// - seleziona l'ultimo programma della lista (quello appena creato in teoria)
@@ -192,8 +189,8 @@ namespace Software_TRADEX
             }
             catch (IOException)
             {
-                string msg = "E00 - errore nella scrittura del file";
-                MessageBox.Show(msg, "E00", MessageBoxButton.OK,
+                string msg = "E03 - errore nella scrittura del file";
+                MessageBox.Show(msg, "E03", MessageBoxButton.OK,
                                 MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                 Globals.log.Error(msg);
             }
@@ -205,10 +202,28 @@ namespace Software_TRADEX
         /// <summary>
         /// Dopo aver caricato la pagina da il focus alla textbox
         /// </summary>
-        public void Progetti_Home_Loaded(object sender, RoutedEventArgs e)
+        public void Software_Loaded(object sender, RoutedEventArgs e)
         {
             TextBox textBox = this.FindName("TextBox") as TextBox;
             textBox.Focus();
+        }
+
+        /// <summary>
+        /// Impostazione iniziale della visibilità dei bottoni secondo le impostazioni
+        /// </summary>
+        private void SetVisibility()
+        {
+            Console.WriteLine("Set visibility");
+            Globals.log.Info("Set visibility");
+            MenuItem ma = this.FindName("Menu_anteprima_check") as MenuItem;
+            ma.IsChecked = Globals.ANTEPRIME;
+            if (!Globals.ANTEPRIME)
+            {
+                RichTextBox richTextBox = this.FindName("richTextBox") as RichTextBox;
+                Button button = this.FindName("buttonOpenDocx") as Button;
+                richTextBox.Visibility = Visibility.Hidden;
+                button.Visibility = Visibility.Hidden;
+            }
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -227,8 +242,8 @@ namespace Software_TRADEX
             }
             else
             {
-                string msg = "La cartella " + path + " che si è cercato di aprire non esiste.";
-                MessageBox.Show(msg, "E00", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
+                string msg = "E04 - La cartella " + path + " che si è cercato di aprire non esiste.";
+                MessageBox.Show(msg, "E04", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                 Globals.log.Warn(msg);
             }
             TextBox textBox = this.FindName("TextBox") as TextBox;
@@ -276,8 +291,8 @@ namespace Software_TRADEX
                     }
                     catch (IOException)
                     {
-                        string msg = "E00 - Il file " + file + " non è stato creato per un problema";
-                        MessageBox.Show(msg, "E00", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
+                        string msg = "E05 - Il file " + file + " non è stato creato per un problema";
+                        MessageBox.Show(msg, "E05", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                         Globals.log.Error(msg);
                     }
                     DataGrid dataGrid = this.FindName("dataGrid") as DataGrid;
@@ -304,15 +319,15 @@ namespace Software_TRADEX
                 }
                 else
                 {
-                    string msg = "E00 non riuscito aggiornamento ultime modifiche";
-                    MessageBox.Show(msg, "E00"
+                    string msg = "E06 non riuscito aggiornamento ultime modifiche";
+                    MessageBox.Show(msg, "E06"
                                          , MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                     Globals.log.Error(msg);
                 }
             }).ContinueWith(task =>
             {
                 buttonModifiche.IsEnabled = true;
-                string msg = "Le ultime modifiche di tutti i progetti di Id" + ProgSelezionato +
+                string msg = "Le ultime modifiche di tutti i programmi di Id" + ProgSelezionato +
                     " sono state aggiornate e caricate nel relativo file csv.";
                 MessageBox.Show(msg, "Modifiche aggiornate"
                                      , MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
@@ -489,17 +504,7 @@ namespace Software_TRADEX
         }
 
         /// <summary>
-        /// Imposta la visibilità dei bottoni di sincronizzazione.
-        /// Aggiorna la variabile Globals.SINCRONIZZAZIONE e scrive sul .csv.
-        /// </summary>
-        private void Menu_sync(object sender, RoutedEventArgs e)
-        {
-
-
-        }
-
-        /// <summary>
-        /// Apre il FORM Form_aggiornaCSV importare file .csv per MATRIX e renderli in formato DATA.
+        /// Apre il FORM Form_conversioneDaTXT importare file TXT per TRADEX e renderli in formato .csv.
         /// </summary>
         private void Menu_converti_TXT(object sender, RoutedEventArgs e)
         {
@@ -508,8 +513,7 @@ namespace Software_TRADEX
         }
 
         /// <summary>
-        /// Se l'utente conferma crea un file programma.docx per ogni programma del cliente attuale
-        /// Inserisce i dati del programma
+        /// Se l'utente conferma crea un file programma.docx per ogni programma con i dati del programma.
         /// </summary>
         private void Menu_DOCX(object sender, RoutedEventArgs e)
         {
@@ -522,7 +526,6 @@ namespace Software_TRADEX
                     if (p != null)
                     {
                         string file = Globals.PROGRAMMIpath + "Id" + p.numero + @"\programma.docx";
-
                         if (!File.Exists(file))
                         {
                             try
@@ -536,13 +539,12 @@ namespace Software_TRADEX
                                 doc.InsertParagraph("\n DESCRIZIONE: " + p.descrizione);
                                 doc.Save();
                                 string msg = "Il file " + file + " è stato creato";
-                                //MessageBox.Show(msg, "E00", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                                 Globals.log.Info(msg);
                             }
                             catch (IOException)
                             {
-                                string msg = "Il file " + file + " NON è stato creato";
-                                //MessageBox.Show(msg, "E00", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
+                                string msg = "E07 - Il file " + file + " NON è stato creato";
+                                //MessageBox.Show(msg, "E07", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                                 Globals.log.Info(msg);
                             }
                             DataGrid dataGrid = this.FindName("dataGrid") as DataGrid;

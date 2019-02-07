@@ -9,12 +9,10 @@ namespace Software_TRADEX
     public class Programma
     {
         /// <summary>
-        /// Classe Progetto composta dagli elementi presenti nei file *CLIENTE*.csv
+        /// Classe Progetto composta dagli elementi presenti nei file PROGRAMMI.csv
         /// Getter e Setter classici. 
         /// Sono presenti alcuni elementi aggiuntivi: 
-        /// - modifica: ultima modifica della cartella relativa al progetto; in seguito ad alcune operazioni viene trovata e aggiunta agli oggetti
-        /// - sync: valore che indica lo stato di aggiornamento tra copia locale e copia in DATIsync
-        /// - sigla: necessario per aver la prima colonna della tabella compatta (concatenazione di suffisso e numero)
+        /// - dataModifica: ultima modifica della cartella relativa al programma; in seguito ad alcune operazioni viene trovata e aggiunta agli oggetti
         /// </summary>
         public int numero { get; set; }
         public string nome { get; set; }
@@ -26,7 +24,7 @@ namespace Software_TRADEX
         public string descrizione { get; set; }
 
         /// <summary>
-        /// Inizializza gli attributi coi valori ricevuto e inizializza dataModifica a null
+        /// Inizializza gli attributi coi valori ricevuto
         /// </summary>
         public Programma(int numero, string nome, string dataCreazione, string dataModifica, bool obsoleto, string nomeUtente, string password, string descrizione)
         {
@@ -40,9 +38,13 @@ namespace Software_TRADEX
             this.descrizione = descrizione ?? throw new ArgumentNullException(nameof(descrizione));
         }
 
+        /// <summary>
+        /// Metodo utilizzato per cercare i programmi nella lista. 
+        /// Vengono utilizzate le parole contenute in numero, nome e descrizione.
+        /// </summary>
         public string toName()
         {
-            return numero + " " + nome + " " + "descrizione";
+            return numero + " " + nome + " " + descrizione;
         }
     }
 }

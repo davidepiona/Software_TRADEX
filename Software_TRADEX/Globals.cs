@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Software_TRADEX
 {
+    /// <summary>
+    /// Classe statica che contiene oggetti accessibili da tutte le altre classi
+    /// </summary>
     public static class Globals
     {
         public static List<Programma> PROGRAMMI;

@@ -12,31 +12,28 @@ namespace Software_TRADEX
     {
         /// <summary>
         /// Classe per la ricerca e memorizzazione dell'ultima modifica avvenuta in una cartella.
-        /// - scrittura e lettura ultima modifica delle cartelle da file csv
-        /// - confronto ultime modifiche sync e non per riempire la checkbox
         /// </summary>
         private Dictionary<string, DateTime> allDate = new Dictionary<string, DateTime>();
-        private Dictionary<string, int> status = new Dictionary<string, int>();
         DateTime dtNew = new DateTime();
 
         /// <summary>
-        /// Costruttore semplice
+        /// Costruttore vuoto
         /// </summary>
         public UltimaModifica()
         {
         }
 
         /// <summary>
-        /// Metodo che scrive nei progetti ricevuti le rispettive ultime modifiche che si hanno in memoria 
-        /// La scrittura avviene in un formato che permette di ordinarli in modo da evidenziare gli ultimi progetti su cui si è lavorato
+        /// Metodo che scrive nei programmi ricevuti le rispettive ultime modifiche che si hanno in memoria 
+        /// La scrittura avviene in un formato che permette di ordinarli in modo da evidenziare gli ultimi programmi su cui si è lavorato
         /// </summary>
-        public void aggiornoModifiche(List<Programma> progetti)
+        public void aggiornoModifiche(List<Programma> programmi)
         {
             Console.WriteLine("Aggiorno Modifiche");
             Globals.log.Info("Aggiorno Modifiche");
-            foreach (Programma p in progetti)
+            foreach (Programma p in programmi)
             {
-                if (allDate.TryGetValue("Id"+p.numero, out DateTime ultima))
+                if (allDate.TryGetValue("Id" + p.numero, out DateTime ultima))
                 {
                     p.dataModifica = ultima.ToString("yyyy/MM/dd HH:mm:ss");
                 }
@@ -69,7 +66,7 @@ namespace Software_TRADEX
             }
             catch (Exception e)
             {
-                string msg = "Eccezione nella ricerca ultime modifiche: " + e;
+                string msg = "E10 - Eccezione nella ricerca ultime modifiche: " + e;
                 Console.WriteLine(msg);
                 Globals.log.Error(msg);
                 return false;
@@ -97,7 +94,7 @@ namespace Software_TRADEX
 
         /// <summary>
         /// Processa tutti i file nella cartella che è stata passata e
-        /// agisce ricorsivamente nello stesso modo in ogni sottodirectory
+        /// agisce ricorsivamente nello stesso modo in ogni sotto-directory
         /// </summary>
         public void ProcessDirectory(string targetDirectory)
         {
@@ -123,151 +120,5 @@ namespace Software_TRADEX
                 dtNew = dt;
             }
         }
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////                             SCRIVI E LEGGI CSV                             ///////////////////               
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        /// Metodo che legge le date da file *CLIENTE*date.csv in DATI e le scrive in allDate
-        /// Restituisce false se per qualche ragione è stata sollevata un IOException
-        /// </summary>
-        public bool readByCSV(string filePath)
-        {
-            int j = 0;
-            try
-            {
-                var file = File.OpenRead(filePath);
-                var reader = new StreamReader(file);
-                while (!reader.EndOfStream)
-                {
-                    string[] line = reader.ReadLine().Split(',');
-                    if (line.Length == 2)
-                    {
-                        allDate.Add(line[0], DateTime.Parse(line[1]));
-                    }
-                    j++;
-                }
-                file.Close();
-            }
-            catch (IOException)
-            {
-                string msg = "E00 - Il file " + filePath + " non esiste o è aperto da un altro programma";
-                Console.WriteLine(msg);
-                Globals.log.Error(msg);
-                return false;
-            }
-            catch (FormatException)
-            {
-                string msg = "E00 - Il file " + filePath + " è in un formato non corretto.\nProblema riscontrato all riga numero: " + j;
-                Console.WriteLine(msg);
-                Globals.log.Error(msg);
-                return false;
-            }
-            Globals.log.Info("Date lette da DATI");
-            return true;
-        }
-
-        /// <summary>
-        /// Metodo che scrive le attuali date memorizzate in allDate nel file *CLIENTE*date.csv contenuto in DATI
-        /// Restituisce false se per qualche ragione è stata sollevata un IOException
-        /// </summary>
-        public bool writeInCSV(string file)
-        {
-
-            string projectDate = "";
-            foreach (KeyValuePair<string, DateTime> i in allDate)
-            {
-                projectDate += i.Key + "," + i.Value + Environment.NewLine;
-            }
-            try
-            {
-                File.WriteAllText(file, projectDate);
-            }
-            catch (IOException)
-            {
-                return false;
-            }
-            Globals.log.Info("Date scritte in DATI");
-            return true;
-        }
     }
 }
-
-// RICERCA RAPIDA --> non implementata perchè la ricerca veloce + il fatto che vengono letti da csv i risultati 
-// delle scorse ricerche si sono (fin ora) rivelati abbastanza rapidi
-
-//public void ricercaRapida()
-//{
-//    string path = PROGETTI + programma.getNomeCliente() + @"\";
-//    if (Directory.Exists(path))
-//    {
-//        foreach (string proj in Directory.GetDirectories(path))
-//        {
-//            allDate.Add(proj.Split('\\').Last(), modificheLiv2(proj));
-//        }
-//    }
-
-//    //foreach (KeyValuePair<string, DateTime> i in allDate)
-//    //{
-//    //    Console.WriteLine(i.ToString() + " ");
-//    //}
-//    confronto();
-//}
-
-//private DateTime modificheLiv2(string proj)
-//{
-//    DateTime dtNew = new DateTime();
-//    if (Directory.Exists(proj))
-//    {
-//        DateTime dt = Directory.GetLastWriteTime(proj);
-//        if (DateTime.Compare(dtNew, dt) < 0)
-//        {
-//            //Console.WriteLine("più nuovo liv1");
-//            dtNew = dt;
-//        }
-//        foreach (string c in Directory.GetDirectories(proj))
-//        {
-//            dt = Directory.GetLastWriteTime(c);
-//            if (DateTime.Compare(dtNew, dt) < 0)
-//            {
-//                //Console.WriteLine("più nuovo liv2");
-//                dtNew = dt;
-//            }
-//        }
-//    }
-//    return dtNew;
-//}
-
-//private List<string> confronto()
-//{
-//    string file = @"C:\Users\attil\source\repos\ExpenseIt\ExpenseIt\DATI\CLIENTI\" + programma.getNomeCliente() + "date.csv";
-//    List<string> daControllare = new List<string>();
-//    List<string> lines = new List<string>();
-//    using (var reader = new CsvFileReader(file))
-//    {
-//        while (reader.ReadRow(lines))
-//        {
-//            if (lines.Count != 0)
-//            {
-//                //Console.WriteLine("letto: " + lines[0]);
-//                DateTime tempDate;
-//                if (allDate.TryGetValue(lines[0], out tempDate))
-//                {
-//                    //Console.WriteLine("trovato " + tempDate + "  " + DateTime.Parse(lines[1]));
-//                    if (DateTime.Compare(DateTime.Parse(tempDate.ToString()), DateTime.Parse(lines[1])) > 0)
-//                    {
-//                        daControllare.Add(lines[0]);
-//                        Console.WriteLine("aggiunto " + lines[0] + " < " + tempDate + ">  <" + DateTime.Parse(lines[1]) + ">");
-//                    }
-//                }
-//            }
-//            else
-//            {
-//                Console.WriteLine("vuoto");
-//            }
-//        }
-//    }
-//    Console.WriteLine("DA CONTROLLARE: " + daControllare.Count);
-//    return daControllare;
-//}
-

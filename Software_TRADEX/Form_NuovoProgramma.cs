@@ -12,15 +12,19 @@ using System.Windows.Forms;
 namespace Software_TRADEX
 {
     /// <summary>
-    /// Form per la creazione di un nuovo cliente
+    /// Form per la creazione di un nuovo programma
     /// - verifica che siano immessi dati adeguati
-    /// - aggiunge il cliente alla lista e al file .csv CLIENTI
-    /// - crea la cartella e i file .csv
+    /// - aggiunge il programma alla lista e al file PROGRAMMI.csv
+    /// - crea la cartella e il file .docx
     /// </summary>
     public partial class Form_NuovoProgramma : Form
     {
 
         private int ultimoProgramma;
+        /// <summary>
+        /// Costruttore a cui viene passato l'indice dell'ultimo programma in lista
+        /// </summary>
+        /// <param name="ultimoProgramma"></param>
         public Form_NuovoProgramma(int ultimoProgramma)
         {
             this.ultimoProgramma = ultimoProgramma;
@@ -36,11 +40,10 @@ namespace Software_TRADEX
         }
 
         /// <summary>
-        /// Metodo che prova a creare un nuovo cliente.
-        /// - verifica che nome e suffisso non siano stringhe vuote e che il suffisso non abbia caratteri non alfanumerici
-        /// - aggiunge il cliente al file CLIENTI.csv
-        /// - crea la cartella per i progetti (se non esiste)
-        /// - crea i file *CLIENTE*.csv e *CLIENTE*data.csv (se non esistono)
+        /// Metodo che prova a creare un nuovo programma.
+        /// - se ci sono stringhe vuote le sostituisce con "."
+        /// - aggiunge il programma al file PROGRAMMI.csv
+        /// - crea la cartella per i file (se non esiste)
         /// Chiude il form
         /// </summary>
         private void button2_Click(object sender, EventArgs e)
@@ -82,8 +85,8 @@ namespace Software_TRADEX
                 }
                 catch (IOException)
                 {
-                    string msg2 = "E00 - La cartella " + Globals.PROGRAMMIpath + @"\" + "Id" + num + " non è stata creata per un problema";
-                    MessageBox.Show(msg2, "E00"
+                    string msg2 = "E15 - La cartella " + Globals.PROGRAMMIpath + @"\" + "Id" + num + " non è stata creata per un problema";
+                    MessageBox.Show(msg2, "E15"
                                          , MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
                     Globals.log.Error(msg2);
                 }
@@ -100,8 +103,8 @@ namespace Software_TRADEX
                 }
                 catch (IOException)
                 {
-                    string msg2 = "E00 - Il file " + fileName + " non è stato creato per un problema";
-                    MessageBox.Show(msg2, "E00", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
+                    string msg2 = "E16 - Il file " + fileName + " non è stato creato per un problema";
+                    MessageBox.Show(msg2, "E16", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
                     Globals.log.Error(msg2);
                 }
                 Globals.log.Info("Aggiunto programma");
@@ -109,8 +112,8 @@ namespace Software_TRADEX
             }
             catch (IOException)
             {
-                string msg = "E00 - Il file " + file + " non esiste o è aperto da un altro programma";
-                MessageBox.Show(msg, "E00", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
+                string msg = "E17 - Il file " + file + " non esiste o è aperto da un altro programma";
+                MessageBox.Show(msg, "E17", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
                 Globals.log.Error(msg);
             }
         }

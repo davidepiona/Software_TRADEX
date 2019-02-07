@@ -14,7 +14,7 @@ namespace Software_TRADEX
 {
     /// <summary>
     /// Form che permette di selezionare le cartelle di origine e destinazione del processo di 
-    /// modifica dei file .csv utilizzati dal programma MATRIX per ottenere dei file .csv leggibili da DATA
+    /// conversione dal file TXT usato dalla vecchia versione di TRADEX al file csv usato nella nuova versione
     /// </summary>
     public partial class Form_conversioneDaTXT : Form
     {
@@ -103,6 +103,7 @@ namespace Software_TRADEX
         }
 
         /// <summary>
+        /// Da all'utente la possibilità di scegliere se effettuare l'importazione o no.
         /// Se i percorsi immessi portano a cartelle esistenti effettua la conversione.
         /// A conversione terminata un MessageBox visualizza l'esito ottenuto.
         /// </summary>
@@ -156,15 +157,17 @@ namespace Software_TRADEX
             try
             {
                 File.WriteAllLines(destFile, lines);
+                System.Windows.MessageBox.Show("Convertito TXT da " + originFile + " a " + destFile, "TXT convertito", MessageBoxButton.OK,
+                                MessageBoxImage.Information, MessageBoxResult.No, System.Windows.MessageBoxOptions.RightAlign);
+                Globals.log.Info("Convertito TXT da " + originFile + " a " + destFile);
             }
             catch (IOException)
             {
-                string msg = "E00 - errore nella conversione file";
-                System.Windows.MessageBox.Show(msg, "E00", MessageBoxButton.OK,
+                string msg = "E18 - errore nella conversione file";
+                System.Windows.MessageBox.Show(msg, "E18", MessageBoxButton.OK,
                                 MessageBoxImage.Error, MessageBoxResult.No, System.Windows.MessageBoxOptions.RightAlign);
                 Globals.log.Error(msg);
             }
-            Globals.log.Info("Convertito TXT da " + originFile + " a " + destFile);
             this.Close();
         }
     }

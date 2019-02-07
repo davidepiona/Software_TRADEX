@@ -18,9 +18,20 @@ namespace Software_TRADEX
 {
     /// <summary>
     /// Logica di interazione per MainWindow.xaml
+    /// Classe della finestra principale che gestisce le operazioni comuni
+    /// - legge il file di settings
+    /// - avvia i log
+    /// - effettua operazioni in chiusura
+    /// - legge e scrive il file SETTINGS.csv
     /// </summary>
     public partial class MainWindow : NavigationWindow
     {
+        /// <summary>
+        /// Costruttore
+        /// - disabilita la barra di navigazione
+        /// - legge SETTINGS.csv
+        /// - imposta i log, dando come cartella di destinazione quella di SETTINGS
+        /// </summary>
         public MainWindow()
         {
             if (Globals.PROGRAMMI == null)
@@ -53,9 +64,9 @@ namespace Software_TRADEX
             }
             catch (IOException)
             {
-                string msg = "E00 - Il file " + Globals.SETTINGS + " non esiste o è aperto da un altro programma." +
+                string msg = "E11 - Il file " + Globals.SETTINGS + " non esiste o è aperto da un altro programma." +
                 " \n\nNon è possibile salvare le nuove preferenze.";
-                MessageBox.Show(msg, "E00 File bloccato", MessageBoxButton.OK,
+                MessageBox.Show(msg, "E11 File bloccato", MessageBoxButton.OK,
                                 MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                 Globals.log.Error(msg);
             }
@@ -63,7 +74,6 @@ namespace Software_TRADEX
 
         /// <summary>
         /// Lettura di SETTINGS.csv
-        /// Se non è possibile aprire il file si apre il Form_initialSettings
         /// Se ci sono errori nel formato del file si utilizzano le impostazioni di defaut
         /// No logging perchè viene effettuato prima di aver impostato il logger
         /// </summary>
@@ -84,14 +94,14 @@ namespace Software_TRADEX
                 }
                 catch (IOException)
                 {
-                    MessageBox.Show("E00 - non è stato possibile aprire il file " + Globals.SETTINGS +
-                        " ", "E00"
+                    MessageBox.Show("E12 - non è stato possibile aprire il file " + Globals.SETTINGS +
+                        " ", "E12"
                                          , MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                 }
                 catch (NullReferenceException)
                 {
-                    MessageBox.Show("E36 - Il file " + Globals.SETTINGS +
-                        " non è nel formato richiesto. \nVerranno caricate alcune impostazioni di base ma la funzionalità non è garantita.", "E36"
+                    MessageBox.Show("E13 - Il file " + Globals.SETTINGS +
+                        " non è nel formato richiesto. \nVerranno caricate alcune impostazioni di base ma la funzionalità non è garantita.", "E13"
                         , MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                 }
             }

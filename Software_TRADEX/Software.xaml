@@ -93,12 +93,12 @@ Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri"
                         <Image Source="R:\TRADE\TRADE\SRC\TXT.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Crea .docx per tutti i programmi" Click="Menu_DOCX" Background="AliceBlue">
+                <MenuItem Header="Crea .docx per tutti i programmi" Click="Menu_DOCX" Background="Ivory">
                     <MenuItem.Icon>
                         <Image Source="R:\TRADE\TRADE\SRC\word.jpg" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Mostra programma.docx" Click="Menu_anteprima" IsCheckable="True" x:Name="Menu_sync_check" Background="Ivory"/>
+                <MenuItem Header="Mostra programma.docx" Click="Menu_anteprima" IsCheckable="True" x:Name="Menu_anteprima_check" Background="Ivory"/>
             </MenuItem>
         </Menu>
         <DataGrid AutoGenerateColumns="False" x:Name="dataGrid" Grid.Column="1" Grid.ColumnSpan="5" HorizontalAlignment="Left" Width="880" Height="566" Margin="10,50,-239.715,0" 
