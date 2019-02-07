@@ -7,11 +7,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="800"
       
-      Title="Software">
+      Title="TRADE">
 
     <Grid x:Name="grid" Margin="10" Grid.Column="1" Grid.Row="1">
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\attil\source\repos\Software_TRADEX\Software_TRADEX\background.jpg" />
+            <ImageBrush ImageSource="R:\TRADE\TRADE\SRC\background.jpg" />
         </Grid.Background>
         <Grid.ColumnDefinitions >
             <ColumnDefinition />
@@ -34,30 +34,31 @@
         </Grid.RowDefinitions>
 
 
-
-        <!--<Canvas  Grid.Column="1" Grid.ColumnSpan="3"  Grid.Row="1" HorizontalAlignment="Left"  Grid.RowSpan="9" VerticalAlignment="Top" Height="750" Width="900" Background="#FFE0E0E0" ClipToBounds="True" UseLayoutRounding="True"/>-->
-        <!--<Canvas  Grid.Column="1" Grid.ColumnSpan="3"  Grid.Row="1" HorizontalAlignment="Left"  Grid.RowSpan="9" VerticalAlignment="Top" Height="750" Width="900" Background="#FFE0E0E0" ClipToBounds="True" UseLayoutRounding="True"/>-->
-        <Border Grid.Column="1" Grid.ColumnSpan="4"  Grid.Row="1" HorizontalAlignment="Left"  Grid.RowSpan="9" VerticalAlignment="Top" Height="650" Width="900" Background="#FFE8E9EB" CornerRadius="8" OpacityMask="#FF4F1A1A" />
-
-
+        <Border Grid.Column="1" Grid.ColumnSpan="4"  Grid.Row="1" HorizontalAlignment="Left"  Grid.RowSpan="9" VerticalAlignment="Top" Height="650" Width="900" 
+                Background="#FFE8E9EB" CornerRadius="8" OpacityMask="#FF4F1A1A" />
 
         <Label x:Name="titolo" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Dubai Medium" 
- FontWeight="Bold" FontSize="50" Foreground="Ivory" Content="SOFTWARE" />
+ FontWeight="Bold" FontSize="50" Foreground="Ivory" Content="SOFTWARE TRADE" />
 
         <Button Grid.Column="5" Grid.Row="2"  Width="150" HorizontalAlignment="Center"
 Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri" 
-                ToolTip="Apre nel filesystem la cartella del progetto selezionato" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}">
-            <Image Source="C:\Users\attil\source\repos\ExpenseIt\ExpenseIt\foldericon.png"/>
+                ToolTip="Apre nel filesystem la cartella del programma selezionato" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}">
+            <Image Source="R:\TRADE\TRADE\SRC\foldericon.png"/>
         </Button>
         <Button Grid.Column="5" Grid.Row="3"  Width="150" HorizontalAlignment="Center"
-            Height="40" Click="Button_New_Project" Background="Ivory" Content="Nuovo Progetto" x:Name="BottNuovo" 
-                ToolTip="Apre il form che permette di creare un nuovo progetto" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121"/>
-        <Button Grid.Column="5" Grid.Row="4"  Width="150" HorizontalAlignment="Center"
+            Height="40" Click="Button_New_Program" Background="Ivory" Content="Nuovo Programma" x:Name="BottNuovo" 
+                ToolTip="Apre il form che permette di creare un nuovo programma" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121"/>
+        <!--<Button Grid.Column="5" Grid.Row="4"  Width="150" HorizontalAlignment="Center"
             Height="40" Click="Button_Convert" Background="Ivory" Content="Conversione" x:Name="BottConv"
-                ToolTip="Converte dal vecchio formato di TRADEX" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121"/>
+                ToolTip="Converte dal vecchio formato di TRADEX" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121"/>-->
         <Button Grid.Column="5" Grid.Row="5"  Width="150" HorizontalAlignment="Center"
             Height="40" Click="Button_Ultime_Modifiche" Background="Ivory" Content="Modifiche" x:Name="BottModifiche" 
-                ToolTip="Aggiorna le ultime modifiche di ogni progetto: &#xA; - cerca l'ultima modifica di ogni cartella &#xA; - le scrive nel csv apposito &#xA; - aggiorna i valori dei progetti &#xA; - aggiorna la tabella" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121"/>
+                ToolTip="Aggiorna le ultime modifiche di ogni programma: &#xA; - cerca l'ultima modifica di ogni cartella &#xA; - aggiorna i valori dei programmi &#xA; - aggiorna la tabella &#xA; - la scrive in SETTINGS.csv" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121"/>
+        <Button Grid.Column="5" Grid.Row="6"  Width="150" HorizontalAlignment="Center"
+            Height="40" Click="Button_Save" Background="Ivory" x:Name="BottSalva"
+                ToolTip="Salva le modifiche apportate alla tabella" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121">
+            <Image Source="R:\TRADE\TRADE\SRC\save.png"/>
+        </Button>
         <!--<Button Grid.Column="5" Grid.Row="6"  Width="150" HorizontalAlignment="Center"
             Height="40" Click="Sync" Background="Green" Content="Sync" x:Name="BottSync"/>-->
 
@@ -68,42 +69,46 @@ Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri"
                  Width="230" Height="30" TextChanged="TextBox_TextChanged" IsHitTestVisible="True" Foreground="#FF212121" />
         <Image Grid.ColumnSpan="6" Grid.Row="1" Height='20' Width='20' HorizontalAlignment="Center" 
                Margin="0,20,210,17" VerticalAlignment="Top" 
-               Source="C:\Users\attil\source\repos\ExpenseIt\ExpenseIt\magnifier.png" />
+               Source="R:\TRADE\TRADE\SRC\magnifier.png" />
 
         <RichTextBox x:Name="richTextBox" Grid.Column="0" Grid.Row="4" Grid.RowSpan="3" Margin="5,5,5,5" IsReadOnly="True" Visibility="Hidden" />
-        <Button x:Name="buttonOpenDocx" Grid.Column="0" Grid.Row="7"  Width="150" HorizontalAlignment="Center" Foreground="#FF212121"
-            Height="40" Click="Button_Apri_Docx" Background="Ivory" Content="Apri Docx" Visibility="Hidden"
-                ToolTip="Apre in Word il file docx visualizzato in anteprima" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}"/>
-
+        <Button x:Name="buttonOpenDocx" Grid.Column="0" Grid.Row="7"  Width="150" HorizontalAlignment="Center" 
+            Height="40" Click="Button_Apri_Docx"  Visibility="Hidden" BorderBrush="{x:Null}" Foreground="#FF212121" Background="Ivory"
+                ToolTip="Controlla se esiste un file programma.docx &#x0a;- se esiste: lo apre in word &#x0a;- se non esiste : lo crea" ToolTipService.InitialShowDelay="2000">
+            <Image Source="R:\TRADE\TRADE\SRC\word.jpg"></Image>
+        </Button>
         <Menu DockPanel.Dock="Left" Grid.Column="5"  Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center"
               Margin="0,0,40,0">
             <MenuItem Width="50" Height="50" FlowDirection="RightToLeft">
                 <MenuItem.Background>
-                    <ImageBrush ImageSource="C:\Users\attil\source\repos\Software_TRADEX\Software_TRADEX\lines.png"/>
+                    <ImageBrush ImageSource="R:\TRADE\TRADE\SRC\lines.png"/>
                 </MenuItem.Background>
                 <MenuItem Header="Imposta percorsi file" Click="Menu_percorsi" Background="Ivory">
                     <MenuItem.Icon>
-                        <Image Source="C:\Users\attil\source\repos\ExpenseIt\ExpenseIt\foldericon.png" />
+                        <Image Source="R:\TRADE\TRADE\SRC\foldericon.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Importa CSV da MATRIX" Click="Menu_importa_CSV" Background="Ivory">
+                <MenuItem Header="Conversione da TXT" Click="Menu_converti_TXT" Background="Ivory">
                     <MenuItem.Icon>
-                        <Image Source="C:\Users\attil\source\repos\ExpenseIt\ExpenseIt\IconCsv.ico" />
+                        <Image Source="R:\TRADE\TRADE\SRC\TXT.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Impostazioni GitHub" Click="Menu_github" Background="Ivory">
+                <MenuItem Header="Crea .docx per tutti i programmi" Click="Menu_DOCX" Background="AliceBlue">
                     <MenuItem.Icon>
-                        <Image Source="C:\Users\attil\source\repos\ExpenseIt\ExpenseIt\github.png" />
+                        <Image Source="R:\TRADE\TRADE\SRC\word.jpg" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Mostra azioni sincronizzazione" Click="Menu_sync" IsCheckable="True" x:Name="Menu_sync_check" Background="Ivory"/>
+                <MenuItem Header="Mostra programma.docx" Click="Menu_anteprima" IsCheckable="True" x:Name="Menu_sync_check" Background="Ivory"/>
             </MenuItem>
         </Menu>
         <DataGrid AutoGenerateColumns="False" x:Name="dataGrid" Grid.Column="1" Grid.ColumnSpan="5" HorizontalAlignment="Left" Width="880" Height="566" Margin="10,50,-239.715,0" 
             Grid.Row="1" Grid.RowSpan="8"  VerticalAlignment="Top" IsSynchronizedWithCurrentItem="True" Foreground="#FF212121" IsReadOnly="True" Background="White" >
             <DataGrid.Resources>
-                <Style TargetType="{x:Type DataGridRow}">
-                    <EventSetter Event="Control.MouseDoubleClick" Handler="Row_DoubleClick"/>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+                <Style TargetType="ScrollBar" BasedOn="{StaticResource {x:Type ScrollBar}}">
+                    <Setter Property="Width" Value="30" />
                 </Style>
             </DataGrid.Resources>
             <DataGrid.RowStyle>
@@ -113,9 +118,16 @@ Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri"
                 </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding numero}" Width="105" FontSize="13" />
-                <DataGridTextColumn Header="Nome" IsReadOnly="True"  Binding="{Binding nome}" Width="489" FontSize="13" />
+                <DataGridTextColumn Header="Nome" IsReadOnly="True"  Binding="{Binding nome}" Width="480" FontSize="13" />
                 <DataGridTextColumn Header="Ultima Modifica" IsReadOnly="True"  Binding="{Binding dataModifica}" Width="180" FontSize="10" />
-                <DataGridCheckBoxColumn Header="Obsoleto" Binding="{Binding obsoleto}" IsReadOnly="False" CanUserResize="False" Width="80" />
+                <DataGridCheckBoxColumn Header="Obsoleto" Binding="{Binding Path=obsoleto, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsFixed}" CanUserResize="False" Width="80" >
+                    <!--<DataGridCheckBoxColumn.CellStyle>
+                        <Style>
+                            <EventSetter Event="CheckBox.Checked" Handler="CheckBoxChanged"/>
+                            <EventSetter Event="CheckBox.Unchecked" Handler="CheckBoxChanged"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>-->
+                    </DataGridCheckBoxColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
