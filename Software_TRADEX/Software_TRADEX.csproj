@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -110,6 +110,12 @@
     <Compile Include="Form_conversioneDaTXT.Designer.cs">
       <DependentUpon>Form_conversioneDaTXT.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_initialSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_initialSettings.Designer.cs">
+      <DependentUpon>Form_initialSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_NuovoProgramma.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +167,9 @@
     </Compile>
     <EmbeddedResource Include="Form_conversioneDaTXT.resx">
       <DependentUpon>Form_conversioneDaTXT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_initialSettings.resx">
+      <DependentUpon>Form_initialSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_NuovoProgramma.resx">
       <DependentUpon>Form_NuovoProgramma.cs</DependentUpon>

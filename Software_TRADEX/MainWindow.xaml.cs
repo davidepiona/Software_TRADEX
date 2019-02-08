@@ -97,6 +97,9 @@ namespace Software_TRADEX
                     MessageBox.Show("E12 - non è stato possibile aprire il file " + Globals.SETTINGS +
                         " ", "E12"
                                          , MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
+                    Form_initialSettings form = new Form_initialSettings();
+                    form.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.leggiSETTINGS);
+                    form.ShowDialog();
                 }
                 catch (NullReferenceException)
                 {
