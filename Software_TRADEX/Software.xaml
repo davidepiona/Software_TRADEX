@@ -11,7 +11,7 @@
 
     <Grid x:Name="grid" Margin="10" Grid.Column="1" Grid.Row="1">
         <Grid.Background>
-            <ImageBrush ImageSource="R:\TRADE\TRADE\SRC\background.jpg" />
+            <ImageBrush ImageSource="T:\TRADE\TRADE\SRC\background.jpg" />
         </Grid.Background>
         <Grid.ColumnDefinitions >
             <ColumnDefinition />
@@ -43,7 +43,7 @@
         <Button Grid.Column="5" Grid.Row="2"  Width="150" HorizontalAlignment="Center"
 Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri" 
                 ToolTip="Apre nel filesystem la cartella del programma selezionato" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}">
-            <Image Source="R:\TRADE\TRADE\SRC\foldericon.png"/>
+            <Image Source="T:\TRADE\TRADE\SRC\foldericon.png"/>
         </Button>
         <Button Grid.Column="5" Grid.Row="3"  Width="150" HorizontalAlignment="Center"
             Height="40" Click="Button_New_Program" Background="Ivory" Content="Nuovo Programma" x:Name="BottNuovo" 
@@ -57,14 +57,14 @@ Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri"
         <Button Grid.Column="5" Grid.Row="6"  Width="150" HorizontalAlignment="Center"
             Height="40" Click="Button_Save" Background="Ivory" x:Name="BottSalva"
                 ToolTip="Salva le modifiche apportate alla tabella" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121">
-            <Image Source="R:\TRADE\TRADE\SRC\save.png"/>
+            <Image Source="T:\TRADE\TRADE\SRC\save.png"/>
         </Button>
         <Button Grid.Column="5" Grid.Row="7"  Width="150" HorizontalAlignment="Center"
             Height="40" Click="Button_Delete" Background="Ivory" x:Name="BottElimina"
                 ToolTip="Elimina il programma selezionato. &#xA;Verrà eliminata la voce nel file .csv &#xA;mentre la cartella non verrà toccata." ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121">
             <StackPanel Orientation="Horizontal" Height="40" VerticalAlignment="Center">
 
-                <Image Source="R:\TRADE\TRADE\SRC\delete.ico" Height="35" Width="40" Margin="0" />
+                <Image Source="T:\TRADE\TRADE\SRC\delete.ico" Height="35" Width="40" Margin="0" />
                 <TextBlock Text="   Elimina" Foreground="Red" VerticalAlignment="Center"/>
             </StackPanel>
             
@@ -79,33 +79,36 @@ Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri"
                  Width="230" Height="30" TextChanged="TextBox_TextChanged" IsHitTestVisible="True" Foreground="#FF212121" />
         <Image Grid.ColumnSpan="6" Grid.Row="1" Height='20' Width='20' HorizontalAlignment="Center" 
                Margin="0,20,210,17" VerticalAlignment="Top" 
-               Source="R:\TRADE\TRADE\SRC\magnifier.png" />
+               Source="T:\TRADE\TRADE\SRC\magnifier.png" />
+        <CheckBox x:Name="Obsoleto_CheckBox" Grid.Row="1" Grid.Column="4" VerticalAlignment="Top" HorizontalAlignment="Center" IsChecked="{x:Null}"
+                 Margin="0,15,25,20" Background="Ivory" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Indeterminate="CheckBox_Indeterminate" IsThreeState="True"
+                  ToolTip="Filtra i progammi a seconda del loro stato &#x0a;TUTTI / RECENTI / OBSOLETI" ToolTipService.InitialShowDelay="2000"></CheckBox>
 
         <RichTextBox x:Name="richTextBox" Grid.Column="0" Grid.Row="4" Grid.RowSpan="3" Margin="5,5,5,5" IsReadOnly="True" Visibility="Hidden" />
         <Button x:Name="buttonOpenDocx" Grid.Column="0" Grid.Row="7"  Width="150" HorizontalAlignment="Center" 
             Height="40" Click="Button_Apri_Docx"  Visibility="Hidden" BorderBrush="{x:Null}" Foreground="#FF212121" Background="Ivory"
                 ToolTip="Controlla se esiste un file programma.docx &#x0a;- se esiste: lo apre in word &#x0a;- se non esiste : lo crea" ToolTipService.InitialShowDelay="2000">
-            <Image Source="R:\TRADE\TRADE\SRC\word.jpg"></Image>
+            <Image Source="T:\TRADE\TRADE\SRC\word.jpg"></Image>
         </Button>
         <Menu DockPanel.Dock="Left" Grid.Column="5"  Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center"
               Margin="0,0,40,0">
             <MenuItem Width="50" Height="50" FlowDirection="RightToLeft">
                 <MenuItem.Background>
-                    <ImageBrush ImageSource="R:\TRADE\TRADE\SRC\lines.png"/>
+                    <ImageBrush ImageSource="T:\TRADE\TRADE\SRC\lines.png"/>
                 </MenuItem.Background>
                 <MenuItem Header="Imposta percorsi file" Click="Menu_percorsi" Background="Ivory">
                     <MenuItem.Icon>
-                        <Image Source="R:\TRADE\TRADE\SRC\foldericon.png" />
+                        <Image Source="T:\TRADE\TRADE\SRC\foldericon.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Conversione da TXT" Click="Menu_converti_TXT" Background="Ivory">
                     <MenuItem.Icon>
-                        <Image Source="R:\TRADE\TRADE\SRC\TXT.png" />
+                        <Image Source="T:\TRADE\TRADE\SRC\TXT.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Crea .docx per tutti i programmi" Click="Menu_DOCX" Background="Ivory">
                     <MenuItem.Icon>
-                        <Image Source="R:\TRADE\TRADE\SRC\word.jpg" />
+                        <Image Source="T:\TRADE\TRADE\SRC\word.jpg" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Mostra programma.docx" Click="Menu_anteprima" IsCheckable="True" x:Name="Menu_anteprima_check" Background="Ivory"/>
@@ -127,9 +130,9 @@ Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri"
                     </Style>
                 </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding numero}" Width="105" FontSize="13" />
-                <DataGridTextColumn Header="Nome" IsReadOnly="True"  Binding="{Binding nome}" Width="480" FontSize="13" />
-                <DataGridTextColumn Header="Ultima Modifica" IsReadOnly="True"  Binding="{Binding dataModifica}" Width="180" FontSize="10" />
+                <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding numero}" Width="90" FontSize="13" />
+                <DataGridTextColumn Header="Nome" IsReadOnly="True"  Binding="{Binding nome}" Width="450" FontSize="15" />
+                <DataGridTextColumn Header="Ultima Modifica" IsReadOnly="True"  Binding="{Binding dataModifica}" Width="190" FontSize="13" />
                 <DataGridCheckBoxColumn Header="Obsoleto" Binding="{Binding Path=obsoleto, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsFixed}" CanUserResize="False" Width="80" >
                     <!--<DataGridCheckBoxColumn.CellStyle>
                         <Style>

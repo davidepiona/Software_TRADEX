@@ -31,19 +31,22 @@ namespace Software_TRADEX
         private int ProgSelezionato;
         private UltimaModifica ultimaModifica;
         private bool newProgram = false;
+        private bool? obs = null;
+        private bool abilitation = false;
 
         /// <summary>
         /// Il costruttore inizializza il componenti. Legge i programmi da file e li scrive nella DataGrid.
         /// </summary>
         public Software()
         {
+            this.ultimaModifica = new UltimaModifica();
             InitializeComponent();
             PreviewKeyDown += new KeyEventHandler(PreviewKeyDown2);
             Loaded += Software_Loaded;
             readPrograms();
             createList();
-            this.ultimaModifica = new UltimaModifica();
             SetVisibility();
+            abilitation = true;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -117,7 +120,7 @@ namespace Software_TRADEX
         /// - aggiunge tutti i programmi presenti e FILTRATI dopo aver svuotato la DataGrid
         /// - mentre scorre i programmi restituisce il primo visualizzato per permettere di selezionarlo durante la ricerca
         /// </summary>
-        private Programma updateList(string filter)
+        private Programma updateList(string filter, bool? obsoleti)
         {
             Console.WriteLine("Update list1");
             Globals.log.Info("Update list1");
@@ -130,14 +133,17 @@ namespace Software_TRADEX
                 int i = 0;
                 foreach (Programma p in Globals.PROGRAMMI)
                 {
-                    if (p.toName().IndexOf(filter, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+                    if (obsoleti == null || p.obsoleto == obsoleti)
                     {
-                        if (i == 0)
+                        if (p.toName().IndexOf(filter, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
                         {
-                            primo = p;
+                            if (i == 0)
+                            {
+                                primo = p;
+                            }
+                            dataGrid.Items.Add(p);
+                            i++;
                         }
-                        dataGrid.Items.Add(p);
-                        i++;
                     }
                 }
             }
@@ -337,7 +343,7 @@ namespace Software_TRADEX
                 MessageBox.Show(msg, "Modifiche aggiornate"
                                      , MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
                 Globals.log.Info(msg);
-                updateList("");
+                updateList("", obs);
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
@@ -471,12 +477,41 @@ namespace Software_TRADEX
         /// </summary>
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Programma p = updateList(((TextBox)sender).Text);
+            Programma p = updateList(((TextBox)sender).Text, obs);
             DataGrid dataGrid = this.FindName("dataGrid") as DataGrid;
             dataGrid.SelectedIndex = 0;
             dataGrid.ScrollIntoView(p);
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Globals.log.Info("Checkbox Checked");
+            obs = true;
+            if (abilitation)
+            {
+                updateList("", obs);
+            }
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Globals.log.Info("Checkbox Unchecked");
+            obs = false;
+            if (abilitation)
+            {
+                updateList("", obs);
+            }
+        }
+
+        private void CheckBox_Indeterminate(object sender, RoutedEventArgs e)
+        {
+            Globals.log.Info("Checkbox Indeterminate");
+            obs = null;
+            if (abilitation)
+            {
+                updateList("", obs);
+            }
+        }
         //ESPERIMENTO PER RICONOSCERE QUANDO CAMBIA LO STATO DELLE CHECKBOX - NON MOLTO FUNZIONANTE
         //private void CheckBoxChanged(object sender, RoutedEventArgs e)
         //{

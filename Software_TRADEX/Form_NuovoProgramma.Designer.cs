@@ -47,11 +47,12 @@
             this.textBox2.BackColor = System.Drawing.Color.Ivory;
             this.textBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBox2.Font = new System.Drawing.Font("Dubai Medium", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(281, 105);
+            this.textBox2.Location = new System.Drawing.Point(515, 194);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(409, 77);
+            this.textBox2.Size = new System.Drawing.Size(747, 139);
             this.textBox2.TabIndex = 25;
             // 
             // label3
@@ -60,9 +61,10 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Dubai Medium", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Ivory;
-            this.label3.Location = new System.Drawing.Point(125, 105);
+            this.label3.Location = new System.Drawing.Point(229, 194);
+            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(138, 39);
+            this.label3.Size = new System.Drawing.Size(233, 67);
             this.label3.TabIndex = 28;
             this.label3.Text = "Descrizione";
             // 
@@ -70,9 +72,10 @@
             // 
             this.textBox1.BackColor = System.Drawing.Color.Ivory;
             this.textBox1.Font = new System.Drawing.Font("Dubai Medium", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(281, 30);
+            this.textBox1.Location = new System.Drawing.Point(515, 55);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(409, 35);
+            this.textBox1.Size = new System.Drawing.Size(747, 55);
             this.textBox1.TabIndex = 23;
             // 
             // label1
@@ -81,9 +84,10 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Dubai Medium", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Ivory;
-            this.label1.Location = new System.Drawing.Point(125, 30);
+            this.label1.Location = new System.Drawing.Point(229, 55);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 39);
+            this.label1.Size = new System.Drawing.Size(132, 67);
             this.label1.TabIndex = 24;
             this.label1.Text = "Nome";
             // 
@@ -91,9 +95,10 @@
             // 
             this.button2.BackColor = System.Drawing.Color.SteelBlue;
             this.button2.Font = new System.Drawing.Font("Dubai Medium", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(538, 338);
+            this.button2.Location = new System.Drawing.Point(986, 624);
+            this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 50);
+            this.button2.Size = new System.Drawing.Size(275, 92);
             this.button2.TabIndex = 31;
             this.button2.Text = "Crea Programma";
             this.button2.UseVisualStyleBackColor = false;
@@ -103,9 +108,10 @@
             // 
             this.button1.BackColor = System.Drawing.Color.Ivory;
             this.button1.Font = new System.Drawing.Font("Dubai Medium", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(362, 338);
+            this.button1.Location = new System.Drawing.Point(664, 624);
+            this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 50);
+            this.button1.Size = new System.Drawing.Size(257, 92);
             this.button1.TabIndex = 30;
             this.button1.Text = "Annulla\r\n";
             this.button1.UseVisualStyleBackColor = false;
@@ -129,9 +135,10 @@
             // 
             this.textBox4.BackColor = System.Drawing.Color.Ivory;
             this.textBox4.Font = new System.Drawing.Font("Dubai Medium", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(281, 276);
+            this.textBox4.Location = new System.Drawing.Point(515, 510);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(409, 35);
+            this.textBox4.Size = new System.Drawing.Size(747, 55);
             this.textBox4.TabIndex = 34;
             // 
             // label2
@@ -140,9 +147,10 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Dubai Medium", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Ivory;
-            this.label2.Location = new System.Drawing.Point(125, 276);
+            this.label2.Location = new System.Drawing.Point(229, 510);
+            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 39);
+            this.label2.Size = new System.Drawing.Size(197, 67);
             this.label2.TabIndex = 35;
             this.label2.Text = "Password";
             // 
@@ -150,9 +158,10 @@
             // 
             this.textBox3.BackColor = System.Drawing.Color.Ivory;
             this.textBox3.Font = new System.Drawing.Font("Dubai Medium", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(281, 202);
+            this.textBox3.Location = new System.Drawing.Point(515, 373);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(409, 35);
+            this.textBox3.Size = new System.Drawing.Size(747, 55);
             this.textBox3.TabIndex = 32;
             // 
             // label4
@@ -161,20 +170,21 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Dubai Medium", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Ivory;
-            this.label4.Location = new System.Drawing.Point(125, 202);
+            this.label4.Location = new System.Drawing.Point(229, 373);
+            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(156, 39);
+            this.label4.Size = new System.Drawing.Size(264, 67);
             this.label4.TabIndex = 33;
             this.label4.Text = "Nome Utente";
             // 
             // Form_NuovoProgramma
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(748, 426);
+            this.ClientSize = new System.Drawing.Size(1371, 786);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox3);
@@ -185,7 +195,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form_NuovoProgramma";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Nuovo Programma";

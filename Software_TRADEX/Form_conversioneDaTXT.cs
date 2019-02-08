@@ -24,7 +24,7 @@ namespace Software_TRADEX
         public Form_conversioneDaTXT()
         {
             InitializeComponent();
-            textBox1.Text = @"R:\PROGETTI\TRADEX\BASE_DATI\tradex.txt";
+            textBox1.Text = @"T:\PROGETTI\TRADEX\BASE_DATI\tradex.txt";
             textBox2.Text = Globals.DATI;
         }
 

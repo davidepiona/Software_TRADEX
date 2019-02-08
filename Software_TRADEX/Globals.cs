@@ -12,10 +12,10 @@ namespace Software_TRADEX
     public static class Globals
     {
         public static List<Programma> PROGRAMMI;
-        public static String PROGRAMMIpath = @"R:\TRADE\SOFTWARE_AZIENDALE\";
-        public static String SETTINGS = @"R:\TRADE\TRADE\SETTINGS.csv";
-        public static String DATI = @"R:\TRADE\TRADE\DATI\";
-        public static String LOG = @"R:\TRADE\TRADE\";
+        public static String PROGRAMMIpath = @"T:\TRADE\SOFTWARE_AZIENDALE\";
+        public static String SETTINGS = @"T:\TRADE\TRADE\SETTINGS.csv";
+        public static String DATI = @"T:\TRADE\TRADE\DATI\";
+        public static String LOG = @"T:\TRADE\TRADE\";
         public static bool ANTEPRIME = true;
         public static bool DEFAULT = false;
         public static log4net.ILog log;

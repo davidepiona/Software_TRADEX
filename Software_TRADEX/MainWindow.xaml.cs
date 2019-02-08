@@ -39,7 +39,7 @@ namespace Software_TRADEX
                 ShowsNavigationUI = false;
                 string set = Globals.SETTINGS;
                 leggiSETTINGS(null, null);
-                log4net.GlobalContext.Properties["LogFileName"] = Globals.LOG + @"\TRADE.log";
+                log4net.GlobalContext.Properties["LogFileName"] = Globals.LOG + "TRADE.log";
                 Globals.log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
                 Globals.log.Info("Settings lette da: " + set);
                 InitializeComponent();
