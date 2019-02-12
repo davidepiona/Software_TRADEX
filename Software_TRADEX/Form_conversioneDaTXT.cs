@@ -24,7 +24,7 @@ namespace Software_TRADEX
         public Form_conversioneDaTXT()
         {
             InitializeComponent();
-            textBox1.Text = @"T:\PROGETTI\TRADEX\BASE_DATI\tradex.txt";
+            textBox1.Text = @"R:\PROGETTI\TRADEX\BASE_DATI\tradex.txt";
             textBox2.Text = Globals.DATI;
         }
 
@@ -141,7 +141,7 @@ namespace Software_TRADEX
                     {
                         break;
                     }
-                    Programma prog = new Programma(Int32.Parse(num), nome, data, ".", false, utente, pwd, ".");
+                    Programma prog = new Programma(Int32.Parse(num), nome, data, ".", false, utente, pwd, ".", false);
                     programmi.Add(prog);
                 } while (objReader.Peek() != -1);
                 objReader.Close();
@@ -151,7 +151,7 @@ namespace Software_TRADEX
             foreach (Programma p in programmi)
             {
                 lines[i] = p.numero + "," + p.nome + "," + p.dataCreazione + "," + p.dataModifica
-                    + "," + p.obsoleto + "," + p.nomeUtente + "," + p.password + "," + p.descrizione;
+                    + "," + p.obsoleto + "," + p.nomeUtente + "," + p.password + "," + p.descrizione + "," + p.presenzaCartella;
                 i++;
             }
             try

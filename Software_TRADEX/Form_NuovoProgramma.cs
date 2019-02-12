@@ -28,7 +28,9 @@ namespace Software_TRADEX
         public Form_NuovoProgramma(int ultimoProgramma)
         {
             this.ultimoProgramma = ultimoProgramma;
+
             InitializeComponent();
+            label5.Text = "Id" + (ultimoProgramma + 1).ToString();
         }
 
         /// <summary>
@@ -61,7 +63,6 @@ namespace Software_TRADEX
             if (password.Equals(""))
                 password = ".";
             string data = (DateTime.Now).ToString();
-            int i = 0;
             int num = ultimoProgramma + 1;
             string file = Globals.DATI + "PROGRAMMI.csv";
             try
@@ -73,8 +74,9 @@ namespace Software_TRADEX
                                         "False" + "," +
                                         nomeUtente + "," +
                                         password + "," +
-                                        descrizione + Environment.NewLine;
-                Console.WriteLine("Aggiugo il programma: "+programDetails);
+                                        descrizione + "," +
+                                        "False" + Environment.NewLine;
+                Console.WriteLine("Aggiugo il programma: " + programDetails);
                 File.AppendAllText(file, programDetails);
                 string msg = "Nuovo programma; avrà l'indice: " + num;
                 Console.WriteLine(msg);
@@ -115,6 +117,25 @@ namespace Software_TRADEX
                 string msg = "E17 - Il file " + file + " non esiste o è aperto da un altro programma";
                 MessageBox.Show(msg, "E17", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
                 Globals.log.Error(msg);
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show(textBox2.Text[textBox2.Text.Length - 1].ToString());
+            try
+            {
+                if (textBox2.Text[textBox2.Text.Length - 1].ToString().Equals("\r") ||
+                    textBox2.Text[textBox2.Text.Length - 1].ToString().Equals("\r\n") ||
+                    textBox2.Text[textBox2.Text.Length - 1].ToString().Equals("\n"))
+                {
+                    textBox2.Text = textBox2.Text.Remove(textBox2.Text.Length - 1);
+                    textBox2.SelectionStart = textBox2.Text.Length + 1;
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                //la stringa è vuota, no problem
             }
         }
     }

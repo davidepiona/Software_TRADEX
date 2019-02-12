@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -110,11 +110,23 @@
     <Compile Include="Form_conversioneDaTXT.Designer.cs">
       <DependentUpon>Form_conversioneDaTXT.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Generali.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Generali.Designer.cs">
+      <DependentUpon>Form_Generali.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_initialSettings.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_initialSettings.Designer.cs">
       <DependentUpon>Form_initialSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Modifica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Modifica.Designer.cs">
+      <DependentUpon>Form_Modifica.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_NuovoProgramma.cs">
       <SubType>Form</SubType>
@@ -129,6 +141,7 @@
       <DependentUpon>Form_percorsi.cs</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Programma.cs" />
     <Compile Include="Software.xaml.cs">
       <DependentUpon>Software.xaml</DependentUpon>
@@ -168,8 +181,14 @@
     <EmbeddedResource Include="Form_conversioneDaTXT.resx">
       <DependentUpon>Form_conversioneDaTXT.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_Generali.resx">
+      <DependentUpon>Form_Generali.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_initialSettings.resx">
       <DependentUpon>Form_initialSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Modifica.resx">
+      <DependentUpon>Form_Modifica.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_NuovoProgramma.resx">
       <DependentUpon>Form_NuovoProgramma.cs</DependentUpon>
@@ -181,9 +200,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="log4net.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

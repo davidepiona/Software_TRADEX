@@ -15,17 +15,20 @@ namespace Software_TRADEX
         /// </summary>
         private Dictionary<string, DateTime> allDate = new Dictionary<string, DateTime>();
         DateTime dtNew = new DateTime();
+        private string attenzionePath;
 
         /// <summary>
         /// Costruttore vuoto
         /// </summary>
         public UltimaModifica()
         {
+            this.attenzionePath = "";
         }
 
         /// <summary>
-        /// Metodo che scrive nei programmi ricevuti le rispettive ultime modifiche che si hanno in memoria 
+        /// Metodo che scrive nei programmi ricevuti le rispettive ultime modifiche che si hanno in memoria poi controlla se esiste una cartella per quel programma
         /// La scrittura avviene in un formato che permette di ordinarli in modo da evidenziare gli ultimi programmi su cui si è lavorato
+        /// Il controllo di presenza della cartella verifica anche che la cartella contenga almeno un elemento
         /// </summary>
         public void aggiornoModifiche(List<Programma> programmi)
         {
@@ -36,6 +39,18 @@ namespace Software_TRADEX
                 if (allDate.TryGetValue("Id" + p.numero, out DateTime ultima))
                 {
                     p.dataModifica = ultima.ToString("yyyy/MM/dd HH:mm:ss");
+                }
+            }
+            foreach (Programma p in programmi)
+            {
+                string path = Globals.PROGRAMMIpath + "Id" + p.numero;
+                if (Directory.Exists(path) && Directory.GetFileSystemEntries(path, "*.*").Count() > 0)
+                {
+                    p.presenzaCartella = true;
+                }
+                else
+                {
+                    p.presenzaCartella = false;
                 }
             }
         }
@@ -51,6 +66,8 @@ namespace Software_TRADEX
         {
             try
             {
+                System.Windows.MessageBox.Show(path);
+
                 allDate = new Dictionary<string, DateTime>();
                 if (Directory.Exists(path))
                 {
@@ -66,7 +83,9 @@ namespace Software_TRADEX
             }
             catch (Exception e)
             {
-                string msg = "E10 - Eccezione nella ricerca ultime modifiche: " + e;
+
+                string msg = "E10 - Eccezione nella ricerca ultime modifiche: " + e + "\n" + attenzionePath;
+                System.Windows.MessageBox.Show(msg);
                 Console.WriteLine(msg);
                 Globals.log.Error(msg);
                 return false;
@@ -113,11 +132,18 @@ namespace Software_TRADEX
         /// </summary>
         private void ProcessFile(string path)
         {
-            DateTime dt = File.GetLastWriteTime(path);
-
-            if (DateTime.Compare(dtNew, dt) < 0)
+            try
             {
-                dtNew = dt;
+                DateTime dt = File.GetLastWriteTime(path);
+
+                if (DateTime.Compare(dtNew, dt) < 0)
+                {
+                    dtNew = dt;
+                }
+            }
+            catch (PathTooLongException)
+            {
+                Globals.log.Error("Errore, PathTooLongException: " + path);
             }
         }
     }

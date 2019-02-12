@@ -70,12 +70,12 @@ namespace Software_TRADEX
                     while (!reader.EndOfStream)
                     {
                         string[] line = reader.ReadLine().Split(',');
-                        if (line.Length == 8)
+                        if (line.Length == 9)
                         {
-                            Globals.PROGRAMMI.Add(new Programma(Int32.Parse(line[0]), line[1], line[2], line[3], line[4].Equals("True"), line[5], line[6], line[7]));
+                            Globals.PROGRAMMI.Add(new Programma(Int32.Parse(line[0]), line[1], line[2], line[3], line[4].Equals("True"), line[5], line[6], line[7], line[8].Equals("True")));
                         }
                         j++;
-                        Console.WriteLine("LETTO"+j);
+                        //Console.WriteLine("LETTO"+j);
                     }
                     file.Close();
                 }
@@ -124,7 +124,7 @@ namespace Software_TRADEX
         {
             Console.WriteLine("Update list1");
             Globals.log.Info("Update list1");
-            Programma primo = new Programma(0, "", "", "", false, "", "", "");
+            Programma primo = new Programma(0, "", "", "", false, "", "", "", false);
             DataGrid dataGrid = this.FindName("dataGrid") as DataGrid;
             ultimaModifica.aggiornoModifiche(Globals.PROGRAMMI);
             if (dataGrid != null)
@@ -181,6 +181,7 @@ namespace Software_TRADEX
                 }
             }
         }
+
         /// <summary>
         /// Metodo per la riscrittura di Globals.PROGRAMMI nel file PROGRAMMI.csv
         /// </summary>
@@ -191,12 +192,12 @@ namespace Software_TRADEX
             foreach (Programma p in Globals.PROGRAMMI)
             {
                 lines.Add(p.numero + "," + p.nome + "," + p.dataCreazione + "," + p.dataModifica
-                    + "," + p.obsoleto + "," + p.nomeUtente + "," + p.password + "," + p.descrizione);
+                    + "," + p.obsoleto + "," + p.nomeUtente + "," + p.password + "," + p.descrizione + "," + p.presenzaCartella);
                 i++;
             }
             try
             {
-                File.WriteAllLines(Globals.DATI+ "PROGRAMMI.csv", lines);
+                File.WriteAllLines(Globals.DATI + "PROGRAMMI.csv", lines);
             }
             catch (IOException)
             {
@@ -237,6 +238,15 @@ namespace Software_TRADEX
             }
         }
 
+        /// <summary>
+        /// Metodo per l'aggiornamento del selettore di indice
+        /// </summary>
+        private void changePreviewForm(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        {
+            DataGrid dataGrid = this.FindName("dataGrid") as DataGrid;
+            ChangePreview(dataGrid, null);
+        }
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////                                BOTTONI                                     ///////////////////               
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -272,7 +282,7 @@ namespace Software_TRADEX
             form.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.readAgainListPrograms);
             form.ShowDialog();
         }
-        
+
         /// <summary>
         /// Controlla se esiste un file programma.docx nel programma attualmente visualizzato 
         /// - se esiste: apre il file docx
@@ -287,15 +297,14 @@ namespace Software_TRADEX
             }
             else
             {
-                Programma programma= Globals.PROGRAMMI.Find(x => x.numero.Equals(ProgSelezionato));
+                Programma programma = Globals.PROGRAMMI.Find(x => x.numero.Equals(ProgSelezionato));
                 if (programma != null)
                 {
                     try
                     {
                         var doc = Xceed.Words.NET.DocX.Create(file);
-                        doc.InsertParagraph("Id" + ProgSelezionato + "  -  "+ programma.nome).Bold();
+                        doc.InsertParagraph("Id" + ProgSelezionato + "  -  " + programma.nome).Bold();
                         doc.InsertParagraph("\n DATA CREAZIONE: " + programma.dataCreazione);
-                        doc.InsertParagraph("\n OBSOLETO: " + programma.obsoleto.ToString());
                         doc.InsertParagraph("\n NOME UTENTE: " + programma.nomeUtente);
                         doc.InsertParagraph("\n PASSWORD: " + programma.password);
                         doc.InsertParagraph("\n DESCRIZIONE: " + programma.descrizione);
@@ -359,22 +368,25 @@ namespace Software_TRADEX
 
 
         /// <summary>
-        /// Bottone che elimina il programma selezionato
+        /// Bottone che apre il form per la modifica del programma selezionato
+        /// - Possibilità di cambiarne i parametri
+        /// - Possibilità di eliminare il programma
         /// </summary>
-        private void Button_Delete(object sender, RoutedEventArgs e)
+        private void Button_Modify(object sender, RoutedEventArgs e)
         {
-            Programma itemToRemove = Globals.PROGRAMMI.Single(r => r.numero == ProgSelezionato);
-            MessageBoxResult dialogResult = MessageBox.Show("Sei sicuro di voler ELIMINARE il programma "+
-                itemToRemove.nome+ " con codice Id"+ ProgSelezionato+"?",
-               "Conferma Eliminazione", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
-            if (dialogResult == MessageBoxResult.Yes)
+            if (ProgSelezionato != 0)
             {
-                if (ProgSelezionato != 0)
+                try
                 {
-                    Console.WriteLine("Rimuovo");
-                    Globals.PROGRAMMI.Remove(itemToRemove);
-                    scriviCSV();
-                    readAgainListPrograms(null, null);
+                    Programma itemToRemove = Globals.PROGRAMMI.Single(r => r.numero == ProgSelezionato);
+                    Form_Modifica form = new Form_Modifica(itemToRemove);
+                    form.FormClosed
+                            += new System.Windows.Forms.FormClosedEventHandler(this.readAgainListPrograms);
+                    form.ShowDialog();
+                }
+                catch (InvalidOperationException)
+                {
+                    Globals.log.Info("Non è stato trovato nessun elemento con indice " + ProgSelezionato + " , probabilmente è stato eliminato in precedenza");
                 }
             }
         }
@@ -387,7 +399,6 @@ namespace Software_TRADEX
         /// </summary>
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("duoble");
             Button_Open_Folder(sender, null);
         }
 
@@ -483,6 +494,10 @@ namespace Software_TRADEX
             dataGrid.ScrollIntoView(p);
         }
 
+        /// <summary>
+        /// Controllo cambiamento valore della checkbox che permette di filtrare i programmi per obsoleti e non. 
+        /// Checkbox Checked
+        /// </summary>
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             Globals.log.Info("Checkbox Checked");
@@ -493,6 +508,10 @@ namespace Software_TRADEX
             }
         }
 
+        /// <summary>
+        /// Controllo cambiamento valore della checkbox che permette di filtrare i programmi per obsoleti e non. 
+        /// Checkbox Unchecked
+        /// </summary>
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             Globals.log.Info("Checkbox Unchecked");
@@ -503,6 +522,10 @@ namespace Software_TRADEX
             }
         }
 
+        /// <summary>
+        /// Controllo cambiamento valore della checkbox che permette di filtrare i programmi per obsoleti e non. 
+        /// Checkbox Indeterminate
+        /// </summary>
         private void CheckBox_Indeterminate(object sender, RoutedEventArgs e)
         {
             Globals.log.Info("Checkbox Indeterminate");
@@ -571,54 +594,20 @@ namespace Software_TRADEX
         private void Menu_converti_TXT(object sender, RoutedEventArgs e)
         {
             Form_conversioneDaTXT form = new Form_conversioneDaTXT();
+            form.FormClosed
+                    += new System.Windows.Forms.FormClosedEventHandler(this.readAgainListPrograms);
             form.ShowDialog();
         }
 
         /// <summary>
         /// Se l'utente conferma crea un file programma.docx per ogni programma con i dati del programma.
         /// </summary>
-        private void Menu_DOCX(object sender, RoutedEventArgs e)
+        private void Menu_Settings(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult dialogResult = MessageBox.Show("Sei sicuro di voler CREARE un file programma.docx in ogni programma?",
-                "Creare TUTTI i DOCX?", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
-            if (dialogResult == MessageBoxResult.Yes)
-            {
-                foreach (Programma p in Globals.PROGRAMMI)
-                {
-                    if (p != null)
-                    {
-                        string file = Globals.PROGRAMMIpath + "Id" + p.numero + @"\programma.docx";
-                        if (!File.Exists(file))
-                        {
-                            try
-                            {
-                                var doc = Xceed.Words.NET.DocX.Create(file);
-                                doc.InsertParagraph("Id" + ProgSelezionato + "  -  " + p.nome).Bold();
-                                doc.InsertParagraph("\n DATA CREAZIONE: " + p.dataCreazione);
-                                doc.InsertParagraph("\n OBSOLETO: " + p.obsoleto.ToString());
-                                doc.InsertParagraph("\n NOME UTENTE: " + p.nomeUtente);
-                                doc.InsertParagraph("\n PASSWORD: " + p.password);
-                                doc.InsertParagraph("\n DESCRIZIONE: " + p.descrizione);
-                                doc.Save();
-                                string msg = "Il file " + file + " è stato creato";
-                                Globals.log.Info(msg);
-                            }
-                            catch (IOException)
-                            {
-                                string msg = "E07 - Il file " + file + " NON è stato creato";
-                                //MessageBox.Show(msg, "E07", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.RightAlign);
-                                Globals.log.Info(msg);
-                            }
-                            DataGrid dataGrid = this.FindName("dataGrid") as DataGrid;
-                            ChangePreview(dataGrid, null);
-                        }
-                    }
-                }
-            }
+            Form_Generali form = new Form_Generali(ProgSelezionato);
+            form.FormClosed
+                    += new System.Windows.Forms.FormClosedEventHandler(this.changePreviewForm);
+            form.ShowDialog();
         }
     }
-
-
-
-
 }

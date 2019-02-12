@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net.Config;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TRADE;
 
 namespace Software_TRADEX
 {
@@ -39,7 +41,7 @@ namespace Software_TRADEX
                 ShowsNavigationUI = false;
                 string set = Globals.SETTINGS;
                 leggiSETTINGS(null, null);
-                log4net.GlobalContext.Properties["LogFileName"] = Globals.LOG + "TRADE.log";
+                Logger.Setup();
                 Globals.log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
                 Globals.log.Info("Settings lette da: " + set);
                 InitializeComponent();
@@ -79,7 +81,7 @@ namespace Software_TRADEX
         /// </summary>
         public void leggiSETTINGS(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
-            Console.WriteLine("Leggo SETTINGS da "+ Globals.SETTINGS);
+            Console.WriteLine("Leggo SETTINGS da " + Globals.SETTINGS);
             if (!Globals.DEFAULT)
             {
                 try

@@ -52,22 +52,20 @@ Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri"
             Height="40" Click="Button_Convert" Background="Ivory" Content="Conversione" x:Name="BottConv"
                 ToolTip="Converte dal vecchio formato di TRADEX" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121"/>-->
         <Button Grid.Column="5" Grid.Row="5"  Width="150" HorizontalAlignment="Center"
-            Height="40" Click="Button_Ultime_Modifiche" Background="Ivory" Content="Modifiche" x:Name="BottModifiche" 
+            Height="40" Click="Button_Ultime_Modifiche" Background="Ivory" Content="Ultime Modifiche" x:Name="BottModifiche" 
                 ToolTip="Aggiorna le ultime modifiche di ogni programma: &#xA; - cerca l'ultima modifica di ogni cartella &#xA; - aggiorna i valori dei programmi &#xA; - aggiorna la tabella &#xA; - la scrive in SETTINGS.csv" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121"/>
         <Button Grid.Column="5" Grid.Row="6"  Width="150" HorizontalAlignment="Center"
             Height="40" Click="Button_Save" Background="Ivory" x:Name="BottSalva"
                 ToolTip="Salva le modifiche apportate alla tabella" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121">
             <Image Source="T:\TRADE\TRADE\SRC\save.png"/>
         </Button>
-        <Button Grid.Column="5" Grid.Row="7"  Width="150" HorizontalAlignment="Center"
-            Height="40" Click="Button_Delete" Background="Ivory" x:Name="BottElimina"
-                ToolTip="Elimina il programma selezionato. &#xA;Verrà eliminata la voce nel file .csv &#xA;mentre la cartella non verrà toccata." ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121">
+        <Button Grid.Column="5" Grid.Row="4"  Width="150" HorizontalAlignment="Center"
+            Height="40" Click="Button_Modify" Background="Ivory" x:Name="BottElimina"
+                ToolTip="Apre il form di modifica del programma &#xA; - possibilità di modificarlo&#xA; - possibilità di eliminarlo" ToolTipService.InitialShowDelay="2000" BorderBrush="{x:Null}" Foreground="#FF212121">
             <StackPanel Orientation="Horizontal" Height="40" VerticalAlignment="Center">
-
-                <Image Source="T:\TRADE\TRADE\SRC\delete.ico" Height="35" Width="40" Margin="0" />
-                <TextBlock Text="   Elimina" Foreground="Red" VerticalAlignment="Center"/>
+                <Image Source="T:\TRADE\TRADE\SRC\pencil.ico" Height="35" Width="40" Margin="0" />
+                <TextBlock Text="   Modifica" Foreground="#FF212121" VerticalAlignment="Center"/>
             </StackPanel>
-            
         </Button>
         <!--<Button Grid.Column="5" Grid.Row="6"  Width="150" HorizontalAlignment="Center"
             Height="40" Click="Sync" Background="Green" Content="Sync" x:Name="BottSync"/>-->
@@ -81,7 +79,7 @@ Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri"
                Margin="0,20,210,17" VerticalAlignment="Top" 
                Source="T:\TRADE\TRADE\SRC\magnifier.png" />
         <CheckBox x:Name="Obsoleto_CheckBox" Grid.Row="1" Grid.Column="4" VerticalAlignment="Top" HorizontalAlignment="Center" IsChecked="{x:Null}"
-                 Margin="0,15,25,20" Background="Ivory" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Indeterminate="CheckBox_Indeterminate" IsThreeState="True"
+                 Margin="0,15,30,20" Background="Ivory" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Indeterminate="CheckBox_Indeterminate" IsThreeState="True"
                   ToolTip="Filtra i progammi a seconda del loro stato &#x0a;TUTTI / RECENTI / OBSOLETI" ToolTipService.InitialShowDelay="2000"></CheckBox>
 
         <RichTextBox x:Name="richTextBox" Grid.Column="0" Grid.Row="4" Grid.RowSpan="3" Margin="5,5,5,5" IsReadOnly="True" Visibility="Hidden" />
@@ -106,9 +104,9 @@ Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri"
                         <Image Source="T:\TRADE\TRADE\SRC\TXT.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Crea .docx per tutti i programmi" Click="Menu_DOCX" Background="Ivory">
+                <MenuItem Header="Azioni generali" Click="Menu_Settings" Background="Ivory">
                     <MenuItem.Icon>
-                        <Image Source="T:\TRADE\TRADE\SRC\word.jpg" />
+                        <Image Source="T:\TRADE\TRADE\SRC\settings.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Mostra programma.docx" Click="Menu_anteprima" IsCheckable="True" x:Name="Menu_anteprima_check" Background="Ivory"/>
@@ -119,28 +117,26 @@ Height="40" Click="Button_Open_Folder" Background="Ivory"  x:Name="BottApri"
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
                     <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                    <Setter Property="Background" Value="White" />
                 </Style>
                 <Style TargetType="ScrollBar" BasedOn="{StaticResource {x:Type ScrollBar}}">
                     <Setter Property="Width" Value="30" />
                 </Style>
             </DataGrid.Resources>
-            <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="White" />
-                    </Style>
-                </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding numero}" Width="90" FontSize="13" />
-                <DataGridTextColumn Header="Nome" IsReadOnly="True"  Binding="{Binding nome}" Width="450" FontSize="15" />
+                <DataGridTextColumn Header="Nome" IsReadOnly="True"  Binding="{Binding nome}" Width="370" FontSize="15" />
                 <DataGridTextColumn Header="Ultima Modifica" IsReadOnly="True"  Binding="{Binding dataModifica}" Width="190" FontSize="13" />
-                <DataGridCheckBoxColumn Header="Obsoleto" Binding="{Binding Path=obsoleto, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsFixed}" CanUserResize="False" Width="80" >
-                    <!--<DataGridCheckBoxColumn.CellStyle>
+                <DataGridCheckBoxColumn Header="Cartella" Binding="{Binding Path=presenzaCartella}" CanUserResize="False" Width="80" />
+                <DataGridCheckBoxColumn Header="Obsoleto" Binding="{Binding Path=obsoleto, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsFixed}" CanUserResize="False" Width="80" />
+
+                <!--<DataGridCheckBoxColumn.CellStyle>
                         <Style>
                             <EventSetter Event="CheckBox.Checked" Handler="CheckBoxChanged"/>
                             <EventSetter Event="CheckBox.Unchecked" Handler="CheckBoxChanged"/>
                         </Style>
                     </DataGridCheckBoxColumn.CellStyle>-->
-                    </DataGridCheckBoxColumn>
+
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

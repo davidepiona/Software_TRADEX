@@ -22,11 +22,12 @@ namespace Software_TRADEX
         public string nomeUtente { get; set; }
         public string password { get; set; }
         public string descrizione { get; set; }
+        public bool presenzaCartella { get; set; }
 
         /// <summary>
         /// Inizializza gli attributi coi valori ricevuto
         /// </summary>
-        public Programma(int numero, string nome, string dataCreazione, string dataModifica, bool obsoleto, string nomeUtente, string password, string descrizione)
+        public Programma(int numero, string nome, string dataCreazione, string dataModifica, bool obsoleto, string nomeUtente, string password, string descrizione, bool presenzaCartella)
         {
             this.numero = numero;
             this.nome = nome ?? throw new ArgumentNullException(nameof(nome));
@@ -36,6 +37,7 @@ namespace Software_TRADEX
             this.nomeUtente = nomeUtente ?? throw new ArgumentNullException(nameof(nomeUtente));
             this.password = password ?? throw new ArgumentNullException(nameof(password));
             this.descrizione = descrizione ?? throw new ArgumentNullException(nameof(descrizione));
+            this.presenzaCartella = presenzaCartella;
         }
 
         /// <summary>
