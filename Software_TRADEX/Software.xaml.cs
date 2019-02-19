@@ -456,9 +456,16 @@ namespace Software_TRADEX
                     string file = Globals.PROGRAMMIpath + "Id" + ProgSelezionato + @"\programma.docx";
                     if (File.Exists(file))
                     {
-                        var doc = Xceed.Words.NET.DocX.Load(file);
-                        richTextBox.Document.Blocks.Clear();
-                        richTextBox.AppendText(doc.Text);
+                        try
+                        {
+                            var doc = Xceed.Words.NET.DocX.Load(file);
+                            richTextBox.Document.Blocks.Clear();
+                            richTextBox.AppendText(doc.Text);
+                        }catch(IOException)
+                        {
+                            string msg = "E52 - Il file " + file + " non è accessibile";
+                            Globals.log.Error(msg);
+                        }
                     }
                     else
                     {

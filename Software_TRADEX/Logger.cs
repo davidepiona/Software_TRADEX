@@ -4,7 +4,7 @@ using log4net.Core;
 using log4net.Appender;
 using log4net.Layout;
 
-namespace TRADE
+namespace Software_TRADEX
 {
     /// <summary>
     /// Classe per definire le configurazioni dei log
@@ -22,7 +22,7 @@ namespace TRADE
 
             RollingFileAppender roller = new RollingFileAppender();
             roller.AppendToFile = true;
-            roller.File = @"T:TRADE\TRADE\TRADE.log";
+            roller.File = @"T:\TRADE\TRADE\TRADE.log";
             roller.Layout = patternLayout;
             roller.MaxSizeRollBackups = 5;
             roller.MaximumFileSize = "10MB";

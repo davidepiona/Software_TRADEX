@@ -15,7 +15,7 @@ namespace Software_TRADEX
     /// Form per la modifica di un programma esistente
     /// - verifica che siano immessi dati adeguati
     /// - aggiunge il programma alla lista e al file PROGRAMMI.csv
-    /// - crea la cartella e il file .docx
+    /// - aggiorna o crea il file .docx
     /// </summary>
     public partial class Form_Modifica : Form
     {
@@ -48,7 +48,7 @@ namespace Software_TRADEX
         /// Metodo che apporta le modifiche all'interno di un programma.
         /// - se ci sono stringhe vuote le sostituisce con "."
         /// - sostituisce il programma in Globals.PROGRAMMI
-        /// - Appende le modifiche in fondo al file di word (o lo creo se non esiste)
+        /// - Appende le modifiche in fondo al file di word (o lo crea se non esiste)
         /// - riscrive il file PROGRAMMI.csv
         /// Chiude il form
         /// </summary>

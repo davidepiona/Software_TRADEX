@@ -147,8 +147,15 @@ namespace Software_TRADEX
                 var folder = new DirectoryInfo(directory);
                 if (folder.GetFileSystemInfos().Length == 0)
                 {
-                    Directory.Delete(directory, false);
-                    countFolder++;
+                    try
+                    {
+                        Directory.Delete(directory, false);
+                        countFolder++;
+                    }
+                    catch (Exception e)
+                    {
+                        Globals.log.Error("Errore nell'eliminazione della cartella " + directory + "\n " + e);
+                    }
                 }
             }
         }

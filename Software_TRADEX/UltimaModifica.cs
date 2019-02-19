@@ -66,8 +66,6 @@ namespace Software_TRADEX
         {
             try
             {
-                System.Windows.MessageBox.Show(path);
-
                 allDate = new Dictionary<string, DateTime>();
                 if (Directory.Exists(path))
                 {
