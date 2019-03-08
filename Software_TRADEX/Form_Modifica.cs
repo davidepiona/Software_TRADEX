@@ -54,10 +54,10 @@ namespace Software_TRADEX
         /// </summary>
         private void button2_Click(object sender, EventArgs e)
         {
-            prog.nome = textBox1.Text.ToString();
-            prog.descrizione = textBox2.Text.ToString();
-            prog.nomeUtente = textBox3.Text.ToString();
-            prog.password = textBox4.Text.ToString();
+            prog.nome = textBox1.Text.ToString().Replace(",", "");
+            prog.descrizione = textBox2.Text.ToString().Replace(",", "");
+            prog.nomeUtente = textBox3.Text.ToString().Replace(",", "");
+            prog.password = textBox4.Text.ToString().Replace(",", "");
             if (prog.nome.Equals(""))
                 prog.nome = ".";
             if (prog.descrizione.Equals(""))

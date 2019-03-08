@@ -50,10 +50,10 @@ namespace Software_TRADEX
         /// </summary>
         private void button2_Click(object sender, EventArgs e)
         {
-            string nome = textBox1.Text.ToString();
-            string descrizione = textBox2.Text.ToString();
-            string nomeUtente = textBox3.Text.ToString();
-            string password = textBox4.Text.ToString();
+            string nome = textBox1.Text.ToString().Replace(",", "");
+            string descrizione = textBox2.Text.ToString().Replace(",", "");
+            string nomeUtente = textBox3.Text.ToString().Replace(",", "");
+            string password = textBox4.Text.ToString().Replace(",", "");
             if (nome.Equals(""))
                 nome = ".";
             if (descrizione.Equals(""))

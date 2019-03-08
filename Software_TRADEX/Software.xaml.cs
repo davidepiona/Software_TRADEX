@@ -75,7 +75,7 @@ namespace Software_TRADEX
                             Globals.PROGRAMMI.Add(new Programma(Int32.Parse(line[0]), line[1], line[2], line[3], line[4].Equals("True"), line[5], line[6], line[7], line[8].Equals("True")));
                         }
                         j++;
-                        //Console.WriteLine("LETTO"+j);
+                        //Console.WriteLine("LETTO"+j + "   "+ Int32.Parse(line[0]));
                     }
                     file.Close();
                 }
